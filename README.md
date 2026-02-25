@@ -1,4 +1,4 @@
-# 🏦 Horizon Banking App
+# Horizon Banking App
 
 A modern, full-stack banking application built with **Next.js 14**, featuring real-time bank integration, fund transfers, and transaction tracking.
 
@@ -9,19 +9,19 @@ A modern, full-stack banking application built with **Next.js 14**, featuring re
 
 ---
 
-## ✨ Features
+## Features
 
-- **🏠 Dashboard** — Total balance overview with animated counters and doughnut chart
-- **🏦 My Banks** — View all connected bank accounts as styled cards
-- **📊 Transaction History** — Paginated transaction table with category badges and status tracking
-- **💸 Transfer Funds** — Send money between accounts via Dwolla
-- **🔗 Connect Bank** — Link new bank accounts using Plaid Link
-- **🔐 Authentication** — Sign in/up with NextAuth.js credentials provider
-- **📱 Responsive** — Full mobile navigation with slide-out drawer
+- **Dashboard** — Total balance overview with animated counters and doughnut chart
+- **My Banks** — View all connected bank accounts as styled cards
+- **Transaction History** — Paginated transaction table with category badges and status tracking
+- **Transfer Funds** — Send money between accounts via Dwolla
+- **Connect Bank** — Link new bank accounts using Plaid Link
+- **Authentication** — Sign in/up with NextAuth.js credentials provider
+- **Responsive** — Full mobile navigation with slide-out drawer
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -38,7 +38,7 @@ A modern, full-stack banking application built with **Next.js 14**, featuring re
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── app/
@@ -62,7 +62,7 @@ A modern, full-stack banking application built with **Next.js 14**, featuring re
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -86,7 +86,7 @@ npm install
 
 ### 3. Set up environment variables
 
-Create a `.env.local` file (use `.env.local.example` as reference):
+Create a `.env.local` file:
 
 ```env
 DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/banking_app"
@@ -116,7 +116,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📊 Database Models
+## Database Models
 
 | Model | Description |
 |-------|-------------|
@@ -127,6 +127,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📄 License
+## License
 
 This project is for educational purposes.
