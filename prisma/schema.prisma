@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  password          String
+  firstName         String
+  lastName          String
+  dateOfBirth       DateTime?
+  ssn               String?       @unique
+  address           String?
+  city              String?
+  state             String?
+  postalCode        String?
+  dwollaCustomerId  String?       @unique
+  dwollaCustomerUrl String?
+  banks             Bank[]
+  transactions      Transaction[]
+  transfersFrom     Transfer[]    @relation("TransfersFrom")
+  transfersTo       Transfer[]    @relation("TransfersTo")
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model Bank {
+  id                String        @id @default(uuid())
+  userId            String
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId         String        @unique
+  accessToken       String
+  itemId            String
+  institutionId     String
+  name              String
+  officialName      String?
+  type              String
+  subtype           String?
+  mask              String?
+  currentBalance    Float         @default(0)
+  availableBalance  Float?
+  isoCurrencyCode   String        @default("USD")
+  shareableId       String        @unique @default(uuid())
+  transactions      Transaction[]
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+model Transaction {
+  id            String   @id @default(uuid())
+  bankId        String
+  bank          Bank     @relation(fields: [bankId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactionId String   @unique
+  name          String
+  amount        Float
+  date          DateTime
+  pending       Boolean  @default(false)
+  category      String[]
+  channel       String
+  paymentMeta   Json?
+  merchantName  String?
+  location      Json?
+  isFraudulent  Boolean  @default(false)
+  fraudScore    Float?
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([bankId])
+  @@index([date])
+}
+
+model Transfer {
+  id                    String    @id @default(uuid())
+  fromUserId            String
+  fromUser              User      @relation("TransfersFrom", fields: [fromUserId], references: [id])
+  toUserId              String
+  toUser                User      @relation("TransfersTo", fields: [toUserId], references: [id])
+  amount                Float
+  currency              String    @default("USD")
+  status                String    @default("pending")
+  dwollaTransferId      String?   @unique
+  sourceFundingUrl      String?
+  destinationFundingUrl String?
+  note                  String?
+  createdAt             DateTime  @default(now())
+  completedAt           DateTime?
+
+  @@index([fromUserId])
+  @@index([toUserId])
+}
